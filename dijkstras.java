@@ -1,0 +1,69 @@
+package college;
+import java.util.*;
+public class DijkstrasClass {
+	final static int max=20;
+	final static int infinity=9999;
+	static int n;
+	static int a[][];
+	static Scanner scan= new Scanner(System.in);
+	public static void main(String[] args) {
+		
+		ReadMatrix();
+		Dij();
+	}
+	
+	static void ReadMatrix() {
+		
+		a=new int[max][max];
+		System.out.println("Enter size of matrix");
+		n=scan.nextInt();
+		System.out.println("Enter matrix elemrnts");
+		for(int i=1;i<=n;i++)
+			for(int j=1;j<=n;j++) {
+				a[i][j]=scan.nextInt();
+			}
+			}
+		
+	static void Dij() {
+		int s=0;
+		System.out.println("Enter starting vertex");
+		s=scan.nextInt();
+		int S[] = new int[max];
+		int d[] = new int[max];
+		int i,u,v;
+		for(i=1;i<=n;i++) {
+			S[i]=0;
+			d[i]=a[s][i];
+		}
+		S[s]=1;
+		d[s]=1;
+		i=2;
+		while(i<=n) {
+			u=Extract_min(S,d);
+			S[u]=1;
+			i++;
+			for(v=1;v<=n;v++) {
+				if(((d[u]+a[u][v]<d[v])&&(S[v]==0)))
+					d[v]=d[u]+a[u][v];
+			}
+			}
+			for(i=1;i<=n;i++)
+				if(i!=s)
+					System.out.println(s+"--->"+i+"shortest path ="+ d[i]);
+		}
+		static int Extract_min(int S[],int d[]) {
+			int i,j=1,min=infinity;
+			for(i=1;i<=n;i++) {
+			if((d[i]<min)&&(S[i]==0)) {
+				min=d[i];
+			j=i;
+		}
+		}
+		
+	return(j);
+				
+			
+			
+		
+	}
+}
